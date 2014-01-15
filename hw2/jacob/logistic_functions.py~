@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-from sklearn import datasets
-
-def load_iris_data():
-    iris = datasets.load_iris()
-    return (iris.data, iris.target, iris.target_names)
-=======
 from sklearn import datasets
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.cross_validation import KFold
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
 
 KNN=True 
 NB=False
@@ -20,7 +15,23 @@ def load_iris_data() :
     # extract the elements of the data that are used in this exercise
     return (iris.data, iris.target, iris.target_names)
 
+def logitr(X_train, y_train):
+    # Logistic regression function
+    logreg = LogisticRegression()
+    clf = logreg.fit(X_train,y_train)
+    return clf
 
+def lr(X_train, y_train):
+    # funtion returns an LR object
+    #  useful methods of this object for this exercise:                                                                                                                    
+    #   fit(X_train, y_train) --> fit the model using a training set                                                                                                       
+    #   predict(X_classify) --> to predict a result using the trained model                                                                                                
+    #   score(X_test, y_test) --> to score the model using a test set
+    
+    clf = LinearRegression()
+    clf.fit(X_train, y_train)
+
+    return clf
 
 def knn(X_train, y_train, k_neighbors = 3 ) :
     # function returns a kNN object
@@ -57,7 +68,7 @@ def cross_validate(XX, yy, classifier, k_fold) :
     # for each training and testing slices run the classifier, and score the results
     for train_slice, test_slice in k_fold_indices :
 
-        model=classifier(XX[[ train_slice  ]],
+        model = classifier(XX[[ train_slice  ]],
                          yy[[ train_slice  ]])
 
         k_score = model.score(XX[[ test_slice ]],
@@ -67,13 +78,3 @@ def cross_validate(XX, yy, classifier, k_fold) :
 
     # return the average accuracy
     return k_score_total/k_fold
-
-"""
-k_fold=3
-X_train, y_train, y_train_names=load_iris_data() 
-if KNN: clf = knn(X_train, y_train, k_neighbors = 3 )
-if NB: nb(X_train, y_train)
-result = cross_validate(X_train, y_train, clf, k_fold)
-print result
-"""
->>>>>>> a9e85340bb201f4620ed62c91ce619caa006468e

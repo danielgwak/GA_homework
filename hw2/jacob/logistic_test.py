@@ -1,8 +1,9 @@
-from hw2 import load_iris_data, cross_validate, knn, nb, lr
+from logistic_functions import load_iris_data, cross_validate, knn, nb, lr, logitr
 
 (XX,yy,y)=load_iris_data()
 
-classfiers_to_cv=[("kNN",knn),("Naive Bayes",nb), ("Linear Regression",lr)]
+classfiers_to_cv=[("Logistic Regression", logitr)]
+
 
 for (c_label, classifer) in classfiers_to_cv :
 
@@ -19,10 +20,5 @@ for (c_label, classifer) in classfiers_to_cv :
 
        print "fold <<%s>> :: acc <<%s>>" % (k_f, cv_a)
 
-<<<<<<< HEAD
-
-=======
-    print dogfood
->>>>>>> a9e85340bb201f4620ed62c91ce619caa006468e
     print "\n %s Highest Accuracy: fold <<%s>> :: <<%s>>\n" % (c_label, best_k, best_cv_a)
 

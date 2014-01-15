@@ -1,8 +1,8 @@
-from hw2 import load_iris_data, cross_validate, knn, nb, lr
+from hw1 import load_iris_data, cross_validate, knn, nb
 
 (XX,yy,y)=load_iris_data()
 
-classfiers_to_cv=[("kNN",knn),("Naive Bayes",nb), ("Linear Regression",lr)]
+classfiers_to_cv=[("kNN",knn),("Naive Bayes",nb)]
 
 for (c_label, classifer) in classfiers_to_cv :
 
@@ -11,7 +11,7 @@ for (c_label, classifer) in classfiers_to_cv :
 
     best_k=0
     best_cv_a=0
-    for k_f in [2,3,5,10,15,30,50,75] :
+    for k_f in [2,3,5,10,15,30,50,75,150] :
        cv_a = cross_validate(XX, yy, classifer, k_fold=k_f)
        if cv_a >  best_cv_a :
             best_cv_a=cv_a
@@ -19,10 +19,6 @@ for (c_label, classifer) in classfiers_to_cv :
 
        print "fold <<%s>> :: acc <<%s>>" % (k_f, cv_a)
 
-<<<<<<< HEAD
 
-=======
-    print dogfood
->>>>>>> a9e85340bb201f4620ed62c91ce619caa006468e
-    print "\n %s Highest Accuracy: fold <<%s>> :: <<%s>>\n" % (c_label, best_k, best_cv_a)
+    print "Highest Accuracy: fold <<%s>> :: <<%s>>" % (best_k, best_cv_a)
 
