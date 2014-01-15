@@ -1,0 +1,4 @@
+from lesson1.py import load_iris_data, cross_validate, knn, nb, lr, logregression
+
+(XX,yy,y)=load_iris_data()
+

@@ -1,3 +1,5 @@
+# Import relevant libraries
+
 from sklearn import datasets
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
