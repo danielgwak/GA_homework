@@ -1,4 +1,11 @@
 print 'Importing Required Modules...'
+
+import urllib
+import os
+import json
+import time
+import random
+import numpy as np
 from sklearn.ensemble.weight_boosting import AdaBoostClassifier
 from sklearn.ensemble.forest import RandomForestClassifier, ExtraTreesClassifier
 from sklearn.cross_validation import cross_val_score
@@ -12,11 +19,32 @@ from sklearn.utils import shuffle
 from sklearn.metrics import roc_curve, auc
 print 'Module Imports Complete.'
 
+# Scrape stock price information from Yahoo Finance
+
+symbols = ['BTH','ZUMZ','NFLX','GTIV','BBY']
+# The above tickers represent the five most volatile stocks of 2013
+
+for symbol in symbols:
+    time.sleep(.1+random.random())
+
+    try:
+        url = 'http://ichart.finance.yahoo.com/table.csv?s=%s&a=00&b=1&c=2013&d=11&e=31&f=2013&g=d&ignore=.csv' % symbol
+        print url
+        data = urllib.urlopen(url).read()
+        file = '%s_data.csv' % (symbol)
+        f = open(file,'w')
+        f.write('%s' % str(data))
+        f.close()
+        print 'File Written as %s' % file
+        data = data.split('\n')
+
+    except:
+        print 'Failed for %s' % symbol
+
 #This points to our most volatile stock price data file
 file = 'BTH_data.csv'
 
-#The threshold value is the over/under point that separates
-#  our two classes
+# Set threshold and cross-validation folds
 threshold = float(14)
 cv = 10
 
